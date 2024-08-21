@@ -11,13 +11,13 @@ namespace EticaretApi.Application.Repositories
     public interface IReadRepository<T> : IRepository<T> where T : BaseEntity 
     {
         // Select Kullanacağımız metotlar burada olacak.
-        IQueryable<T> GetAll(); // Iqueryable ilgili veri tabanı sorgusunu oluşturur. // IEnumerable memoryde tutuar
+        IQueryable<T> GetAll(bool tracking = true); // Iqueryable ilgili veri tabanı sorgusunu oluşturur. // IEnumerable memoryde tutuar
 
-        IQueryable<T> GetWhere(Expression<Func<T,bool>> method);
+        IQueryable<T> GetWhere(Expression<Func<T,bool>> method, bool tracking = true);
 
-        Task<T> GetSingleAsync(Expression<Func<T, bool>> method);
+        Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true);
 
-        Task<T> GetByIdAsync(string id);
+        Task<T> GetByIdAsync(string id, bool tracking = true);
 
     }
 }
