@@ -2,12 +2,14 @@
 
 
 using EticaretApi.Persistence;
+using EticaretApi.Application;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddPersistanceServices();
+builder.Services.AddApplicationServices();
 builder.Services.AddCors(options=>options.AddDefaultPolicy(policy=>
     policy.WithOrigins("http://localhost:3000", "https://localhost:3000").AllowAnyHeader()
 ));
