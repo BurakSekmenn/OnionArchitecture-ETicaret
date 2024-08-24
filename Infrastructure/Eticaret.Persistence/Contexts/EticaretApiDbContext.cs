@@ -25,11 +25,20 @@ namespace EticaretApi.Persistence.Contexts
                 
             foreach (var data in datas)
             {
-                _ = data.State switch
+                //_ = data.State switch
+                //{
+                //    EntityState.Added => data.Entity.CreatedAt = DateTime.Now,
+                //    EntityState.Modified => data.Entity.UpdatedDate = DateTime.Now,
+                //    _ =>{ }
+                //};
+                if (data.State == EntityState.Added)
                 {
-                    EntityState.Added => data.Entity.CreatedAt = DateTime.Now,
-                    EntityState.Modified => data.Entity.UpdatedDate = DateTime.Now,
-                };
+                    data.Entity.CreatedAt = DateTime.Now;
+                }
+                else if (data.State == EntityState.Modified)
+                {
+                    data.Entity.UpdatedDate = DateTime.Now;
+                }
             }
             return await base.SaveChangesAsync(cancellationToken);
         }

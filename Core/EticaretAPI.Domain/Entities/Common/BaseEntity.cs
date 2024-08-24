@@ -12,6 +12,7 @@ namespace EticaretApi.Domain.Entities.Common
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedDate { get; set; }
 
+        
 
 
 

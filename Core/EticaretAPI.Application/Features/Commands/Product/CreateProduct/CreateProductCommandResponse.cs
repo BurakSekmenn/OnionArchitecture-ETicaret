@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EticaretApi.Application.Features.Commands.CreateProduct
+namespace EticaretApi.Application.Features.Commands.Product.CreateProduct
 {
     public class CreateProductCommandResponse
     {
         public CreateProductCommandResponse()
         {
-            this.MyProperty = "Başarılı Bir Şekilde Oluşturuldu";
+            MyProperty = "Başarılı Bir Şekilde Oluşturuldu";
         }
         public string MyProperty { get; set; }
     }

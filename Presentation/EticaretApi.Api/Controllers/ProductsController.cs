@@ -1,5 +1,8 @@
-﻿using EticaretApi.Application.Features.Commands.CreateProduct;
-using EticaretApi.Application.Features.Queries.GetAllProduct;
+﻿using EticaretApi.Application.Features.Commands.Product.CreateProduct;
+using EticaretApi.Application.Features.Commands.Product.RemoveProduct;
+using EticaretApi.Application.Features.Commands.Product.UpdateProduct;
+using EticaretApi.Application.Features.Queries.Product.GetAllProduct;
+using EticaretApi.Application.Features.Queries.Product.GetByIdProduct;
 using EticaretApi.Application.Repositories;
 using EticaretApi.Domain.Entities;
 using MediatR;
@@ -113,14 +116,24 @@ namespace EticaretApi.Api.Controllers
             return Ok(response);
         }
 
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> Get([FromRoute] GetByIdProductQueryRequest ıdProductQueryRequest)
         {
-            var product = await _productReadRepository.GetByIdAsync(id);
-            return Ok(product);
+            GetByIdProductQueryResponse response = await _mediator.Send(ıdProductQueryRequest);
+            return Ok(response);
         }
-
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdateProductCommandRequest updateProductCommandRequest)
+        {
+            UpdateProductCommandResponse response = await _mediator.Send(updateProductCommandRequest);
+            return Ok(response);
+        }
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] RemoveProductCommandRequest removeProductCommandRequest)
+        {
+            RemoveProductCommandResponse response = await _mediator.Send(removeProductCommandRequest);
+            return Ok(response);
+        }
 
     }
 }

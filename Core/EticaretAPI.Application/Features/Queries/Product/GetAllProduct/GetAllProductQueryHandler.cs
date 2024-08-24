@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EticaretApi.Application.Features.Queries.GetAllProduct
+namespace EticaretApi.Application.Features.Queries.Product.GetAllProduct
 {
     public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, GetAllProductQueryResponse>
     {
@@ -21,9 +21,9 @@ namespace EticaretApi.Application.Features.Queries.GetAllProduct
         // IRequestHandler interface'inden gelen Handle metodu implemente edilir. 
         public Task<GetAllProductQueryResponse> Handle(GetAllProductQueryRequest request, CancellationToken cancellationToken)
         {
-            var totalCount =  _productReadRepository.GetAll(false).Count();
+            var totalCount = _productReadRepository.GetAll(false).Count();
             var products = _productReadRepository.GetAll(false)
-                .Skip((request.Page) * request.Size)
+                .Skip(request.Page * request.Size)
                 .Take(request.Size).Select(p => new
                 {
                     p.Id,

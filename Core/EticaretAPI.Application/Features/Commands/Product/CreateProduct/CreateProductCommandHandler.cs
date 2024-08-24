@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EticaretApi.Application.Features.Commands.CreateProduct
+namespace EticaretApi.Application.Features.Commands.Product.CreateProduct
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, CreateProductCommandResponse>
     {
@@ -21,14 +21,14 @@ namespace EticaretApi.Application.Features.Commands.CreateProduct
         {
             await _productWriteRepository.AddAsync(new()
             {
-                 Name = request.Name,
-                 Stock = request.Stock,
-                 Price = request.Price
+                Name = request.Name,
+                Stock = request.Stock,
+                Price = request.Price
             });
             await _productWriteRepository.SaveAsync();
 
             return new CreateProductCommandResponse();
-          
+
         }
     }
 }
