@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using EticaretApi.Application.Abstractions.Token;
+using EticaretApi.Infrastructure.Services.Token;
 
 
 namespace EticaretApi.Persistence
@@ -56,7 +58,7 @@ namespace EticaretApi.Persistence
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
 
 
-
+            services.AddScoped<ITokenHandler, TokenHandler>();
         }
 
     }

@@ -6,6 +6,7 @@ using EticaretApi.Application.Features.Queries.Product.GetByIdProduct;
 using EticaretApi.Application.Repositories;
 using EticaretApi.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace EticaretApi.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class ProductsController : ControllerBase
     {
        
