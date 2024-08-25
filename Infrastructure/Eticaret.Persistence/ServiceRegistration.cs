@@ -1,4 +1,5 @@
 ﻿using EticaretApi.Application.Repositories;
+using EticaretApi.Domain.Entities.Identity;
 using EticaretApi.Persistence.Contexts;
 using EticaretApi.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace EticaretApi.Persistence
 {
@@ -22,6 +25,25 @@ namespace EticaretApi.Persistence
             {
                 options.UseMySql(Configuration.ConnectionString, new MySqlServerVersion(new Version(8, 0, 32)));
             }, ServiceLifetime.Scoped);
+
+
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredLength = 3;
+               
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+            })
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<EticaretApiDbContext>();
+
+
 
 
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
